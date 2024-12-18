@@ -198,27 +198,153 @@
     </div>
 
     <script>
-        const muppetResponses = {
-            default: "I don't know what you mean... but I feel the darkness growing.",
-            secrets: "The ritual is almost complete. Do you seek the truth?",
-            hello: "Hello, traveler. Are you lost, or are you seeking something... deeper?",
-            danger: "Beware. Not all who wander into the Grid leave whole."
+        const localLLM = {
+            "secret": "Ah, the veil is thin. Seek the altar, and you may uncover the truth.",
+            "ritual": "The ritual requires blood, fire, and a sacrifice. Do you have what it takes?",
+            "danger": "You tread a dangerous path. Not all who seek knowledge survive the encounter.",
+            "help": "Help? None can save you from the whispers in the void.",
+            "fate": "Fate is a web, tangled and unyielding. Will you escape its pull?",
+            "curse": "The curse is ancient, binding. Dare you break it?",
+            "echo": "The echoes of the past linger, calling you toward forbidden truths.",
+            "abyss": "The abyss gazes back, its hunger unquenched. Will you peer into it?",
+            "vision": "Your vision is clouded. The truth is hidden in the fog.",
+            "hunger": "The hunger grows, insatiable and demanding. Feed it, or face the consequences.",
+            "whispers": "The whispers are not your own. They know your darkest secrets.",
+            "sacrifice": "All things demand a price. What will you sacrifice to gain knowledge?",
+            "tremor": "A tremor shakes the ground. The earth stirs beneath your feet.",
+            "frost": "The chill of the unknown freezes your bones. Step forward, if you dare.",
+            "blood": "Blood is the key, but what will it unlock?",
+            "fire": "The fire cleanses, but also consumes. Will you endure its flame?",
+            "storm": "A storm is coming. The winds of change are at your back.",
+            "darkness": "The darkness surrounds you. Embrace it, or flee from it.",
+            "light": "Light is a fleeting ally. It will not guide you for long.",
+            "truth": "Truth is a sword with two edges. Are you prepared to wield it?",
+            "shadows": "The shadows conceal much. You must step into them to understand.",
+            "secret": "A secret lingers in the air, waiting to be uncovered.",
+            "temptation": "Temptation beckons. Will you follow, or resist its call?",
+            "night": "The night is long and filled with unspeakable things.",
+            "illusion": "What you see may not be real. Trust only what you feel.",
+            "mirror": "The mirror shows not what you are, but what you could become.",
+            "gate": "The gate stands before you. Will you cross its threshold?",
+            "veil": "The veil between worlds is thin, and the spirits are restless.",
+            "oracle": "The oracle speaks in riddles. Decode them, if you can.",
+            "heart": "Your heart beats in rhythm with the world. Can you hear it?",
+            "curse": "To lift the curse, you must first understand its origin.",
+            "soul": "Your soul is bound by forces unseen. Will you break free?",
+            "unseen": "The unseen is all around you. Will you dare to confront it?",
+            "mystery": "A mystery unfolds. Will you uncover its secrets, or leave them buried?",
+            "sorrow": "Sorrow is the price of wisdom. How much are you willing to pay?",
+            "veil": "The veil is thin, but the truth beyond is endless.",
+            "whisper": "A whisper carries more weight than you know. Listen closely.",
+            "sight": "Your sight is limited, but your senses can pierce the veil.",
+            "curse": "The curse lingers, and its effects are far-reaching.",
+            "star": "The stars have their own language. Can you read their message?",
+            "storm": "The storm rages, but the heart remains calm.",
+            "fate": "Fate cannot be outrun. It will catch up to you, in time.",
+            "silence": "In silence, the truth speaks the loudest.",
+            "illusion": "Everything is an illusion until proven real.",
+            "beyond": "What lies beyond the veil is a mystery waiting to unfold.",
+            "test": "A test awaits you. Will you rise to meet it?",
+            "awakening": "The awakening has begun. The world will never be the same.",
+            "horizon": "The horizon beckons, but it is always out of reach.",
+            "soul": "The soul is a fragile thing. Treat it with care.",
+            "flame": "The flame flickers, but it never dies.",
+            "temptation": "The greatest temptation is the one you cannot resist.",
+            "labyrinth": "The labyrinth twists and turns, leading you deeper into the unknown.",
+            "power": "Power is an illusion. The true strength lies within.",
+            "truth": "The truth is elusive, but it will find you when you least expect it.",
+            "hello": "Greetings. What brings you here today?",
+            "goodbye": "Farewell, traveler. May your journey be swift.",
+            "yes": "A decision made. What comes next?",
+            "no": "A door closed. What now?",
+            "please": "Your request is heard. What can I do for you?",
+            "thank you": "Gratitude is a language I understand.",
+            "sorry": "Apologies. May forgiveness follow.",
+            "help": "Help? I can offer guidance, but the path is yours to walk.",
+            "stop": "A pause, a moment to reflect.",
+            "go": "Move forward, if you must. The world awaits.",
+            "wait": "Patience is key. The right moment will come.",
+            "love": "Love is the force that drives us all.",
+            "hate": "Hate only breeds more hate. Will you let it consume you?",
+            "peace": "Peace is a fleeting dream, but one worth chasing.",
+            "war": "War is chaos in its purest form. Are you prepared for it?",
+            "life": "Life is but a journey. How will you walk it?",
+            "death": "Death is the end, or perhaps the beginning of something new.",
+            "dream": "Dreams are whispers from the soul. Will you listen?",
+            "fear": "Fear is a shadow, following you wherever you go.",
+            "hope": "Hope is the light in the darkest of times.",
+            "truth": "Truth is often hidden in plain sight.",
+            "lie": "A lie may hide the truth, but it cannot erase it.",
+            "friend": "A friend is a companion on the journey of life.",
+            "enemy": "An enemy is a reflection of your own fears.",
+            "trust": "Trust is a fragile bond. Treat it with care.",
+            "betrayal": "Betrayal cuts deep, but it also reveals the truth.",
+            "victory": "Victory is sweet, but it comes with its own cost.",
+            "defeat": "Defeat is but a lesson, not the end.",
+            "strength": "Strength is not in the body, but in the will.",
+            "weakness": "Weakness is an opportunity for growth.",
+            "courage": "Courage is the spark that ignites action.",
+            "fear": "Fear is the cage that holds you back.",
+            "joy": "Joy is fleeting, but its memory endures.",
+            "sadness": "Sadness is the shadow of joy, but it too will pass.",
+            "light": "Light guides the way, but it also reveals the darkness.",
+            "dark": "Darkness is not the absence of light, but its counterpart.",
+            "rain": "The rain cleanses, but also makes the earth grow.",
+            "sun": "The sun shines bright, but its warmth is fleeting.",
+            "wind": "The wind whispers secrets only the trees understand.",
+            "earth": "The earth is both our home and our keeper.",
+            "water": "Water flows, shapes, and gives life. It cannot be stopped.",
+            "fire": "Fire consumes, but also creates.",
+            "air": "Air is the breath of life, unseen yet essential.",
+            "mountain": "The mountain stands firm, unyielding in its position.",
+            "ocean": "The ocean is vast and mysterious. It holds many secrets.",
+            "sky": "The sky is limitless, yet often clouded with doubt.",
+            "star": "The stars are distant, yet they guide us with their light.",
+            "moon": "The moon reflects the sun's light, yet has its own glow.",
+            "cloud": "Clouds gather, darken, and rain down wisdom.",
+            "storm": "A storm is nature's fury, uncontrollable yet powerful.",
+            "peace": "Peace is the balance between chaos and order.",
+            "freedom": "Freedom is a gift, yet also a responsibility.",
+            "prison": "A prison is not only of stone, but of the mind.",
+            "hope": "Hope is the beacon that keeps us moving forward.",
+            "despair": "Despair is the anchor that holds us down.",
+            "dream": "Dreams are the path to possibility.",
+            "reality": "Reality is shaped by perception, but what is real?",
+            "past": "The past is a guide, but it should not control you.",
+            "present": "The present is where you have power. Use it wisely.",
+            "future": "The future is uncertain, but full of potential.",
+            "choice": "A choice is a fork in the road. Which path will you take?",
+            "decide": "Decisions define you. Choose carefully.",
+            "change": "Change is inevitable, but how you adapt is the key.",
+            "growth": "Growth is painful, but essential for progress.",
+            "regret": "Regret is the burden of choices not made.",
+            "lesson": "Every mistake is a lesson in disguise.",
+            "journey": "The journey is long, but each step is meaningful.",
+            "path": "The path is never clear, but it is yours to follow.",
+            "destination": "The destination is only part of the journey. What will you learn along the way?",
+            "hi": "Fuck off.",
+            "yo": "yo bro fuck off.",
+            "sup": "hehe.",
+            "cringe": "No u.",
+            "bro": "bro?",
+            "bruh": "bruh.",
+            "default": "The void does not understand your words. Try again."
         };
 
         function talkToMuppet() {
             const input = document.getElementById('muppetInput');
-            const message = input.value.trim().toLowerCase();
-            let response = muppetResponses.default;
+            const userMessage = input.value.trim().toLowerCase();
+            let response = localLLM.default;
 
-            if (message.includes('secret')) {
-                response = muppetResponses.secrets;
-            } else if (message.includes('hello')) {
-                response = muppetResponses.hello;
-            } else if (message.includes('danger')) {
-                response = muppetResponses.danger;
+            for (const key in localLLM) {
+                if (userMessage.includes(key)) {
+                    response = localLLM[key];
+                    break;
+                }
             }
 
-            alert(`Muppet says: ${response}`);
+            const muppetResponse = `Muppet says: ${response}`;
+            alert(muppetResponse);
             input.value = '';
         }
     </script>
