@@ -18,60 +18,60 @@
             min-height: 100vh;
             overflow: hidden;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 20px;
             text-align: center;
         }
-        
+
         .title {
             font-size: 3rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 5px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            background: linear-gradient(90deg, #ff0000, #550000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 40px;
             animation: glitch 1s infinite;
         }
-        
+
         @keyframes glitch {
             0% {
-                text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+                text-shadow: 2px 2px #ff0000, -2px -2px #550000;
             }
             50% {
-                text-shadow: -2px -2px #ff00ff, 2px 2px #00ffff;
+                text-shadow: -2px -2px #ff0000, 2px 2px #550000;
             }
             100% {
-                text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+                text-shadow: 2px 2px #ff0000, -2px -2px #550000;
             }
         }
-        
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 20px;
         }
-        
+
         .grid-item {
-            background: linear-gradient(135deg, #ff0080, #8000ff);
+            background: linear-gradient(135deg, #440000, #220000);
             border: none;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #ffffff;
+            color: #ffcccc;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
             transition: transform 0.4s, box-shadow 0.4s;
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
-        
+
         .grid-item::before {
             content: '';
             position: absolute;
@@ -79,29 +79,29 @@
             left: -100%;
             width: 300%;
             height: 300%;
-            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+            background: linear-gradient(135deg, transparent, rgba(255, 0, 0, 0.2));
             transform: rotate(45deg);
             transition: opacity 0.4s;
             opacity: 0;
             z-index: -1;
         }
-        
+
         .grid-item:hover {
             transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 8px 20px rgba(255, 0, 255, 0.6);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
         }
-        
+
         .grid-item:hover::before {
             opacity: 1;
         }
-        
+
         .grid-item span {
             display: block;
             font-size: 3rem;
-            color: #ffffff;
+            color: #ff3333;
             animation: neon-flicker 1.5s infinite;
         }
-        
+
         @keyframes neon-flicker {
             0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
                 opacity: 1;
@@ -110,6 +110,52 @@
                 opacity: 0.4;
             }
         }
+
+        /* Muppet Styles */
+        .muppet-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #222;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .muppet {
+            font-size: 1rem;
+            color: #ffcccc;
+            margin-bottom: 10px;
+        }
+
+        .muppet-input {
+            display: flex;
+        }
+
+        .muppet-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: #111;
+            color: #ffcccc;
+        }
+
+        .muppet-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #ff0000, #550000);
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .muppet-input button:hover {
+            background: linear-gradient(90deg, #550000, #ff0000);
+        }
     </style>
 </head>
 <body>
@@ -117,30 +163,64 @@
         <h1 class="title">Grid Glitch</h1>
         <div class="grid">
             <div class="grid-item">
-                <span>1</span>
-                Glitching Item
+                <span>☠</span>
+                Ritual Dagger
             </div>
             <div class="grid-item">
-                <span>2</span>
-                Glitching Item
+                <span>⚰</span>
+                Cursed Coffin
             </div>
             <div class="grid-item">
-                <span>3</span>
-                Glitching Item
+                <span>🔮</span>
+                Blood Oracle
             </div>
             <div class="grid-item">
-                <span>4</span>
-                Glitching Item
+                <span>🕯</span>
+                Dark Candles
             </div>
             <div class="grid-item">
-                <span>5</span>
-                Glitching Item
+                <span>📜</span>
+                Forbidden Scrolls
             </div>
             <div class="grid-item">
-                <span>6</span>
-                Glitching Item
+                <span>💀</span>
+                Skull Idol
             </div>
         </div>
     </div>
+
+    <div class="muppet-container">
+        <div class="muppet">Hi! I'm your Muppet friend. Ask me anything... if you dare.</div>
+        <div class="muppet-input">
+            <input type="text" id="muppetInput" placeholder="Type a message...">
+            <button onclick="talkToMuppet()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const muppetResponses = {
+            default: "I don't know what you mean... but I feel the darkness growing.",
+            secrets: "The ritual is almost complete. Do you seek the truth?",
+            hello: "Hello, traveler. Are you lost, or are you seeking something... deeper?",
+            danger: "Beware. Not all who wander into the Grid leave whole."
+        };
+
+        function talkToMuppet() {
+            const input = document.getElementById('muppetInput');
+            const message = input.value.trim().toLowerCase();
+            let response = muppetResponses.default;
+
+            if (message.includes('secret')) {
+                response = muppetResponses.secrets;
+            } else if (message.includes('hello')) {
+                response = muppetResponses.hello;
+            } else if (message.includes('danger')) {
+                response = muppetResponses.danger;
+            }
+
+            alert(`Muppet says: ${response}`);
+            input.value = '';
+        }
+    </script>
 </body>
 </html>
