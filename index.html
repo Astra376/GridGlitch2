@@ -5,53 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grid Glitch</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212;
+            background: radial-gradient(circle, #1e1e2f, #121212);
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden;
         }
+        
         .container {
             max-width: 1200px;
             margin: 20px;
+            text-align: center;
         }
+        
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 40px;
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+            }
+            50% {
+                text-shadow: -2px -2px #ff00ff, 2px 2px #00ffff;
+            }
+            100% {
+                text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+            }
+        }
+        
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
+            padding: 20px;
         }
+        
         .grid-item {
-            background: linear-gradient(45deg, #ff00ff, #00ffff);
-            border: 2px solid #ffffff;
+            background: linear-gradient(135deg, #ff0080, #8000ff);
+            border: none;
+            border-radius: 10px;
             padding: 20px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
+        
+        .grid-item::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+            transform: rotate(45deg);
+            transition: opacity 0.4s;
+            opacity: 0;
+            z-index: -1;
+        }
+        
         .grid-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(255, 0, 255, 0.6);
         }
-        .title {
-            text-align: center;
-            margin-bottom: 40px;sad
+        
+        .grid-item:hover::before {
+            opacity: 1;
+        }
+        
+        .grid-item span {
+            display: block;
+            font-size: 3rem;
+            color: #ffffff;
+            animation: neon-flicker 1.5s infinite;
+        }
+        
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.4;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title">Welcome to Grid Glitch</h1>
+        <h1 class="title">Grid Glitch</h1>
         <div class="grid">
-            <div class="grid-item">Item 1</div>
-            <div class="grid-item">Item 2</div>
-            <div class="grid-item">Item 3</div>
-            <div class="grid-item">Item 4</div>
-            <div class="grid-item">Item 5</div>
-            <div class="grid-item">Item 6</div>
+            <div class="grid-item">
+                <span>1</span>
+                Glitching Item
+            </div>
+            <div class="grid-item">
+                <span>2</span>
+                Glitching Item
+            </div>
+            <div class="grid-item">
+                <span>3</span>
+                Glitching Item
+            </div>
+            <div class="grid-item">
+                <span>4</span>
+                Glitching Item
+            </div>
+            <div class="grid-item">
+                <span>5</span>
+                Glitching Item
+            </div>
+            <div class="grid-item">
+                <span>6</span>
+                Glitching Item
+            </div>
         </div>
     </div>
 </body>
